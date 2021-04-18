@@ -5,19 +5,16 @@
 <table>
   <thead>
     <tr>
-      <th>Theft coverage</th>
-      <th>Deductible</th>
       <th>Yearly premium</th>
-      <th colspan="3"></th>
+      <th colspan="4"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @contracts.each do |contract| %>
       <tr>
-        <td><%= contract.theft_coverage %></td>
-        <td><%= contract.deductible %></td>
         <td><%= contract.yearly_premium %></td>
+        <td><%= link_to 'Properties', user_contract_properties_path(@user, contract) %></td>
         <td><%= link_to 'Show', user_contract_path(@user, contract) %></td>
         <td><%= link_to 'Edit', edit_user_contract_path(@user, contract) %></td>
         <td><%= link_to 'Destroy', user_contract_path(@user, contract), method: :delete, data: { confirm: 'Are you sure?' } %></td>
