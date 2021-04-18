@@ -3,4 +3,8 @@ class Contract < ApplicationRecord
   enum billing_cycle: BILLING_CYCLES
 
   belongs_to :user
+
+  def yearly_premium
+    theft_coverage - deductible
+  end
 end

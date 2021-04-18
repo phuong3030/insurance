@@ -8,6 +8,6 @@ class Invoice < ApplicationRecord
 
   protected
   def calculate_total_price
-    self.total = contract.theft_coverage - contract.deductible
+    self.total = contract.yearly_premium
   end
 end
