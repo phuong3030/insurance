@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :properties
   resources :users, only: [:index, :create] do
     resources :contracts do
       get :premium

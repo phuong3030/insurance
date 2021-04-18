@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Contract, type: :model do
   it { should belong_to :user }
+  it { should have_many :properties }
 
   describe "Billing Cycles" do
     subject { FactoryBot.build(:contract) }
@@ -18,7 +19,7 @@ RSpec.describe Contract, type: :model do
   it "calculate total price by contract properties" do
     expect(subject.yearly_premium).to(
       be_within(0.001).of(
-        subject.theft_coverage - subject.deductible
+        0.0
       )
     )
   end
