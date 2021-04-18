@@ -6,6 +6,6 @@ class Contract < ApplicationRecord
   belongs_to :user
 
   def yearly_premium
-    0.0
+    properties.inject(0.0) { |acc, cur| acc + cur.value }
   end
 end
