@@ -3,6 +3,7 @@ class Contract < ApplicationRecord
   enum billing_cycle: BILLING_CYCLES
 
   has_many :properties
+  has_many :invoices
   belongs_to :user
 
   def yearly_premium

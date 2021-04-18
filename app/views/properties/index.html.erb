@@ -18,9 +18,9 @@
         <td><%= property.name %></td>
         <td><%= property.value %></td>
         <td><%= property.contract_id %></td>
-        <td><%= link_to 'Show', property %></td>
-        <td><%= link_to 'Edit', edit_property_path(property) %></td>
-        <td><%= link_to 'Destroy', property, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', contract_property_path(property.contract, property) %></td>
+        <td><%= link_to 'Edit', edit_contract_property_path(property.contract, property) %></td>
+        <td><%= link_to 'Destroy', contract_property_path(property.contract, property), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,6 @@
 
 <br>
 
-<%= link_to 'New Property', new_property_path %>
+<%= link_to 'New Property', new_contract_property_path %>
+<br>
+<%= link_to 'List Contracts', contracts_path %>

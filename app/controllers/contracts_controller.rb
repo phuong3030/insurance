@@ -1,19 +1,11 @@
 class ContractsController < ApplicationController
-  before_action :set_user
-  before_action :set_contract, only: %i[ premium show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :set_contract, only: %i[ premium show update ]
 
   # GET /contracts or /contracts.json
   def index
     @contracts = Contract.all
-  end
-
-  # GET /contracts/new
-  def new
-    @contract = Contract.new
-  end
-
-  # GET /contracts/1/edit
-  def edit
+    @contract = current_user.contracts.build
   end
 
   # POST /contracts or /contracts.json
@@ -22,35 +14,10 @@ class ContractsController < ApplicationController
 
     respond_to do |format|
       if @contract.save
-        format.html { redirect_to user_contract_path(@user, @contract), notice: "Contract was successfully created." }
-        format.json { render :show, status: :created, location: @contract }
+        format.html { redirect_to contracts_path(), notice: "Contract was successfully created." }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @contract.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /contracts/1 or /contracts/1.json
-  def update
-    respond_to do |format|
-      if @contract.update(contract_params)
-        format.html { redirect_to user_contract_path(@user, @contract), notice: "Contract was successfully updated." }
-        format.json { render :show, status: :ok, location: @contract }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @contract.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /contracts/1 or /contracts/1.json
-  def destroy
-    binding.pry
-    @contract.destroy
-    respond_to do |format|
-      format.html { redirect_to user_contracts_url(@user), notice: "Contract was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
@@ -58,10 +25,6 @@ class ContractsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_contract
     @contract = Contract.find(params[:id])
-  end
-
-  def set_user
-    @user = User.find(params[:user_id])
   end
 
   # Only allow a list of trusted parameters through.

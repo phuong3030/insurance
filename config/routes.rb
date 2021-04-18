@@ -1,13 +1,11 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :create] do
-    resources :contracts do
-      get :premium
-      resources :properties
-    end
+  devise_for :users
 
+  resources :contracts, only: [:index, :show, :create ] do
+    get :premium
+    resources :properties
     resources :invoices, only: [:index, :create, :show]
   end
 
-
-  root to: "users#index"
+  root to: "contracts#index"
 end

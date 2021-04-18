@@ -5,7 +5,7 @@
 <table>
   <thead>
     <tr>
-      <th>Total</th>
+      <th>Created At</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -13,15 +13,11 @@
   <tbody>
     <% @invoices.each do |invoice| %>
       <tr>
-        <td><%= invoice.total %></td>
-        <td><%= link_to 'Show', invoice %></td>
-        <td><%= link_to 'Edit', edit_invoice_path(invoice) %></td>
-        <td><%= link_to 'Destroy', invoice, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= invoice.created_at %></td>
+        <td><%= link_to 'Show', contract_invoice_path(@invoice.contract, invoice) %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Invoice', new_invoice_path %>
+<%= render 'form', invoice: @invoice %>

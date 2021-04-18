@@ -14,10 +14,9 @@
     <% @contracts.each do |contract| %>
       <tr>
         <td><%= contract.yearly_premium %></td>
-        <td><%= link_to 'Properties', user_contract_properties_path(@user, contract) %></td>
-        <td><%= link_to 'Show', user_contract_path(@user, contract) %></td>
-        <td><%= link_to 'Edit', edit_user_contract_path(@user, contract) %></td>
-        <td><%= link_to 'Destroy', user_contract_path(@user, contract), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Properties', contract_properties_path(contract) %></td>
+        <td><%= link_to 'Show', contract_path(contract) %></td>
+        <td><%= link_to 'Invoices', contract_invoices_path(contract) %></td>
       </tr>
     <% end %>
   </tbody>
@@ -25,6 +24,4 @@
 
 <br>
 
-<%= link_to 'New Contract', new_user_contract_path %>
-<br>
-<%= link_to 'Users', users_path %>
+<%= render 'form', contract: @contract %>

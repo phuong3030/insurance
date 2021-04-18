@@ -1,0 +1,7 @@
+<%= form_with(model: [invoice.contract, invoice]) do |form| %>
+  <%= form.hidden_field :contract_id %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,4 @@
-<%= form_with(model: contract, url: user_contracts_path(user.id)) do |form| %>
+<%= form_with(model: contract) do |form| %>
   <% if contract.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(contract.errors.count, "error") %> prohibited this contract from being saved:</h2>
@@ -11,7 +11,7 @@
     </div>
   <% end %>
 
-  <%= form.hidden_field :user_id, value: user.id %>
+  <%= form.hidden_field :user_id %>
 
   <div class="actions">
     <%= form.submit %>

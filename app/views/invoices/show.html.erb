@@ -5,5 +5,5 @@
   <%= @invoice.total %>
 </p>
 
-<%= link_to 'Edit', edit_invoice_path(@invoice) %> |
-<%= link_to 'Back', invoices_path %>
+<%= link_to 'Edit', edit_contract_invoice_path(@invoice.contract, @invoice) %> |
+<%= link_to 'Back', contract_invoices_path %>
