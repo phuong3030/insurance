@@ -3,6 +3,7 @@ class Invoice < ApplicationRecord
   include Undestroyable
 
   belongs_to :contract
+  has_many :invoice_items
 
   before_create :calculate_total_price
 

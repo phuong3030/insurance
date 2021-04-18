@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_18_031232) do
+ActiveRecord::Schema.define(version: 2021_04_18_042423) do
 
   create_table "contracts", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -18,6 +18,16 @@ ActiveRecord::Schema.define(version: 2021_04_18_031232) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "billing_cycle"
     t.index ["user_id"], name: "index_contracts_on_user_id"
+  end
+
+  create_table "invoice_items", force: :cascade do |t|
+    t.decimal "actual_price", precision: 8, scale: 2, default: "0.0"
+    t.integer "property_id", null: false
+    t.integer "invoice_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+    t.index ["property_id"], name: "index_invoice_items_on_property_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -29,8 +39,8 @@ ActiveRecord::Schema.define(version: 2021_04_18_031232) do
   end
 
   create_table "properties", force: :cascade do |t|
-    t.string "name"
-    t.decimal "value"
+    t.string "name", null: false
+    t.decimal "value", precision: 8, scale: 2, default: "0.0"
     t.integer "contract_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -43,6 +53,8 @@ ActiveRecord::Schema.define(version: 2021_04_18_031232) do
   end
 
   add_foreign_key "contracts", "users"
+  add_foreign_key "invoice_items", "invoices"
+  add_foreign_key "invoice_items", "properties"
   add_foreign_key "invoices", "contracts"
   add_foreign_key "properties", "contracts"
 end
