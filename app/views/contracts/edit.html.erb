@@ -1,6 +1,5 @@
 <h1>Editing Contract</h1>
 
-<%= render 'form', contract: @contract %>
+<%= render 'form', contract: @contract, user: @user %>
 
-<%= link_to 'Show', @contract %> |
-<%= link_to 'Back', contracts_path %>
+<%= link_to 'Back', user_contracts_path %>
