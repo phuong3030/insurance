@@ -2,9 +2,8 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :contracts, only: [:index, :show, :create ] do
-    get :premium
     resources :properties
-    resources :invoices, only: [:index, :create, :show]
+    resources :invoices, only: [:index, :create]
   end
 
   root to: "contracts#index"

@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Contract, type: :model do
+  it { should validate_presence_of(:billing_cycle) }
+
   it { should belong_to :user }
   it { should have_many :properties }
   it { should have_many :invoices }

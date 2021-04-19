@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_18_224634) do
+ActiveRecord::Schema.define(version: 2021_04_19_143614) do
 
   create_table "contracts", force: :cascade do |t|
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "billing_cycle"
+    t.integer "billing_cycle", default: 12, null: false
     t.index ["user_id"], name: "index_contracts_on_user_id"
   end
 
@@ -35,6 +35,7 @@ ActiveRecord::Schema.define(version: 2021_04_18_224634) do
     t.integer "contract_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "payment_due", precision: 6, null: false
     t.index ["contract_id"], name: "index_invoices_on_contract_id"
   end
 

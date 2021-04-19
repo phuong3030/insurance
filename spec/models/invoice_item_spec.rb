@@ -1,6 +1,4 @@
 require 'rails_helper'
-require Rails.root.join "spec/concerns/uneditable_spec.rb"
-require Rails.root.join "spec/concerns/undestroyable_spec.rb"
 
 RSpec.describe InvoiceItem, type: :model do
   subject { FactoryBot.build(:invoice_item) }

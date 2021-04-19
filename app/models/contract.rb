@@ -6,6 +6,8 @@ class Contract < ApplicationRecord
   has_many :invoices
   belongs_to :user
 
+  validates_presence_of :billing_cycle
+
   def yearly_premium
     properties.inject(0.0) { |acc, cur| acc + cur.value }
   end

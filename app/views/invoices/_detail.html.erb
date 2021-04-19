@@ -1,0 +1,40 @@
+<p>
+  <strong>Contract premium:</strong>
+  <%= invoice.invoice_items.inject(0.0) { |acc, cur| acc + cur.actual_price } %>
+</p>
+
+<p>
+  <strong>Payment Due:</strong>
+  <%= invoice.payment_due %>
+</p>
+
+<p>
+  <strong>Invoice Items:</strong>
+  <table>
+    <thead>
+      <tr>
+        <th>Item Name</th>
+        <th>Actual Price</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <% invoice.invoice_items.each do |item| %>
+        <tr>
+          <td><%= item.property.name %></td>
+          <td><%= item.actual_price %></td>
+        </tr>
+      <% end %>
+    </tbody>
+
+    <tfoot>
+      <tr>
+        <th>Total</th>
+        <th><%= invoice.total %></th>
+      </tr>
+
+    </tfoot>
+
+  </table>
+</p>
