@@ -10,16 +10,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_17_145904) do
+ActiveRecord::Schema.define(version: 2021_04_19_143614) do
 
   create_table "contracts", force: :cascade do |t|
-    t.decimal "theft_coverage", precision: 8, scale: 2, default: "0.0"
-    t.decimal "deductible", precision: 8, scale: 2, default: "0.0"
     t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "billing_cycle"
+    t.integer "billing_cycle", default: 12, null: false
     t.index ["user_id"], name: "index_contracts_on_user_id"
+  end
+
+  create_table "invoice_items", force: :cascade do |t|
+    t.decimal "actual_price", precision: 8, scale: 2, default: "0.0"
+    t.integer "property_id", null: false
+    t.integer "invoice_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["invoice_id"], name: "index_invoice_items_on_invoice_id"
+    t.index ["property_id"], name: "index_invoice_items_on_property_id"
   end
 
   create_table "invoices", force: :cascade do |t|
@@ -27,14 +35,34 @@ ActiveRecord::Schema.define(version: 2021_04_17_145904) do
     t.integer "contract_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.datetime "payment_due", precision: 6, null: false
     t.index ["contract_id"], name: "index_invoices_on_contract_id"
+  end
+
+  create_table "properties", force: :cascade do |t|
+    t.string "name", null: false
+    t.decimal "value", precision: 8, scale: 2, default: "0.0"
+    t.integer "contract_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contract_id"], name: "index_properties_on_contract_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "contracts", "users"
+  add_foreign_key "invoice_items", "invoices"
+  add_foreign_key "invoice_items", "properties"
   add_foreign_key "invoices", "contracts"
+  add_foreign_key "properties", "contracts"
 end

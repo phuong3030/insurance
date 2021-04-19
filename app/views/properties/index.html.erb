@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Properties</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Value</th>
+      <th>Contract</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @properties.each do |property| %>
+      <tr>
+        <td><%= property.name %></td>
+        <td><%= property.value %></td>
+        <td><%= property.contract_id %></td>
+        <td><%= link_to 'Show', contract_property_path(property.contract, property) %></td>
+        <td><%= link_to 'Edit', edit_contract_property_path(property.contract, property) %></td>
+        <td><%= link_to 'Destroy', contract_property_path(property.contract, property), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Property', new_contract_property_path %>
+<br>
+<%= link_to 'List Contracts', contracts_path %>

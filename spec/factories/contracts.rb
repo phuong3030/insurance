@@ -2,7 +2,11 @@ FactoryBot.define do
   factory :contract do
     billing_cycle { 12 }
     user { build(:user) }
-    theft_coverage { 100.0 }
-    deductible { -10.0 }
+
+    trait :with_properties do
+      after(:build) do |contract|
+        contract.properties = FactoryBot.build_list(:property, 5)
+      end
+    end
   end
 end

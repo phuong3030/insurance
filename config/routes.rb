@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
-  resources :users, only: [:index, :create] do
-    resources :contracts do
-      get :premium
-      resources :invoices, except: [:update, :edit]
-    end
+  devise_for :users
+
+  resources :contracts, only: [:index, :show, :create ] do
+    resources :properties
+    resources :invoices, only: [:index, :create]
   end
 
-  root to: "users#index"
+  root to: "contracts#index"
 end
