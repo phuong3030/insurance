@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @property.name %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @property.value %>
+</p>
+
+<p>
+  <strong>Contract:</strong>
+  <%= @property.contract_id %>
+</p>
+
+<%= link_to 'Edit', edit_contract_property_path(@property) %> |
+<%= link_to 'Back', contract_properties_path %>

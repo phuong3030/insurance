@@ -1,0 +1,10 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Invoices</h1>
+
+<% @invoices.each do |invoice| %>
+  <h2>Invoice <%= invoice.id %></h2>
+  <%= render 'detail', invoice: invoice %>
+<% end %>
+
+<%= render 'form', invoice: @invoice %>

@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Contracts</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Yearly premium</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @contracts.each do |contract| %>
+      <tr>
+        <td><%= contract.yearly_premium %></td>
+        <td><%= link_to 'Properties', contract_properties_path(contract) %></td>
+        <td><%= link_to 'Show', contract_path(contract) %></td>
+        <td><%= link_to 'Invoices', contract_invoices_path(contract) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= render 'form', contract: @contract %>

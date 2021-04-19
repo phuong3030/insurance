@@ -1,0 +1,6 @@
+<h1>Editing Property</h1>
+
+<%= render 'form', property: @property %>
+
+<%= link_to 'Show', contract_property_path(@property.contract, @property) %> |
+<%= link_to 'Back', contract_properties_path %>
